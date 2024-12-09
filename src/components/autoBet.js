@@ -83,6 +83,9 @@ const StyledAutoBet = styled.div`
         --to: #2c3552;
         --from: #3b466d;
         color: #c5d0e9;
+        &:hover{
+            filter: brightness(1.1);
+        }
     }
 
 `

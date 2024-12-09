@@ -8,9 +8,27 @@ import arc from '../img/circle.svg'
 import arrow from '../img/arrow.svg'
 import DoubleControlPanel from "../components/doubleControlPanel.js"
 import Footer from "../components/footer.js"
-
+import { useEffect, useRef, useState } from "react"
 
 function Double() {
+    // #ff825699  gold
+    // #3d76d199 blue
+    // #3ffdff99 green
+
+    const [activeRoulette, setActiveRoulette] = useState(false)
+    const illuminationInnerRef = useRef(null)
+    const illuminationOuterRef = useRef(null)
+
+    useEffect(() => {
+        if (activeRoulette) {
+            illuminationInnerRef.current.style.backgroundColor = '#ff825699'
+            illuminationOuterRef.current.style.backgroundColor = '#ff825680'
+        } else {
+            illuminationInnerRef.current.style.backgroundColor = '#48629699'
+            illuminationOuterRef.current.style.backgroundColor = '#516e9e'
+        }   
+        
+    },[activeRoulette])
 
     return (
         <StyledDouble>
@@ -24,23 +42,23 @@ function Double() {
                                 <div className="roulette-block">
                                     <div className="roulette-position">
                                         <div className="double-wheel-decor">
-                                            <div className="double-wheel-decor__arrow"></div>
+                                            <div className={activeRoulette ? 'double-wheel-decor__arrow opacity' : 'double-wheel-decor__arrow'} ></div>
                                             <div className="double-wheel-decor__bg">
-                                                <div className="double-wheel-decor__light"></div>
+                                                <div className="double-wheel-decor__light" ref={illuminationOuterRef}></div>
                                                 <div className="double-wheel-decor__circle">
-                                                    <div className="double-wheel-decor__circle-light">
+                                                    <div className="double-wheel-decor__circle-light" ref={illuminationInnerRef}>
 
                                                     </div>
                                                     <div className="double-wheel-decor__circle-dots-wrapper">
 
                                                     </div>
                                                 </div>
-                                                <div className="double-wheel-decor__arc">
+                                                <div className={activeRoulette ? 'double-wheel-decor__arc opacity' : 'double-wheel-decor__arc'}>
 
                                                 </div>
                                             </div>
                                         </div>
-                                        <Roulette cells={cells}/>
+                                        <Roulette cells={cells} setActiveRoulette={setActiveRoulette}/>
                                     </div>
                                     <div>
                                         
@@ -167,6 +185,7 @@ const StyledContent = styled.section`
     }
         
     .double-wheel-decor__circle{
+        overflow: hidden;
         position: absolute;
         left: 50%;
         top: 50%;
@@ -204,7 +223,7 @@ const StyledContent = styled.section`
 
     .double-wheel-decor__circle-light{
         position: absolute;
-        bottom: -23.5rem;
+        bottom: -17.5rem;
         left: 50%;
         z-index: -1;
         aspect-ratio: 1 / 1;
@@ -219,6 +238,7 @@ const StyledContent = styled.section`
     }
 
     .double-wheel-decor__arc{
+        opacity: 0;
         aspect-ratio: 1 / 1;
         -webkit-mask-image: url(${arc});
         mask-image: url(${arc});
@@ -235,6 +255,7 @@ const StyledContent = styled.section`
     }
 
     .double-wheel-decor__arrow{
+        opacity: 0;
         aspect-ratio: 1 / 1;
         -webkit-mask-image: url(${arrow});
         mask-image: url(${arrow});
@@ -255,6 +276,10 @@ const StyledContent = styled.section`
         transition-timing-function: cubic-bezier(.4,0,.2,1);
         transition-duration: .3s;
         transform: translateX(-50%);
+    }
+
+    .opacity{
+        opacity: 1;
     }
 
 `

@@ -17,7 +17,7 @@ function DoubleControlPanel() {
 }
 
 const StyledDoubleControlPanel = styled.section`
-    width: 16.5rem;
+    width: 17.5rem;
     background: #1e253d;
     padding: 1.25rem;
     border-radius: 1.25rem;

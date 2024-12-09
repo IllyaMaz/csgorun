@@ -25,7 +25,7 @@ const StyledBetCard = styled.button`
     border-radius: .875rem;
     overflow: hidden;
     font-weight: 700;
-    height: 4.5rem;
+    aspect-ratio: 1 / .9;
     border: 0;
     cursor: pointer;
     padding-left: .75rem;

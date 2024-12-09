@@ -2,9 +2,15 @@ import { useRef, useState } from "react";
 import styled from "styled-components";
 import RouletteCell from "./rouletteCell";
 
-function Roulette({ cells }) {
+function Roulette({ cells, setActiveRoulette }) {
     const rouletteRef = useRef(null);
     const [isSpinning, setIsSpinning] = useState(false);
+
+    const handleStartRoulette = () => {
+        setActiveRoulette(true)
+
+        setTimeout(() => setActiveRoulette(false),3000)
+    }
 
     const spinRoulette = () => {
         if (isSpinning) return;
@@ -20,6 +26,8 @@ function Roulette({ cells }) {
             roulette.style.transform = `rotate(${totalRotation % 360}deg)`;
             setIsSpinning(false);
         }, 3000);
+
+        handleStartRoulette()
     };
 
     return (
