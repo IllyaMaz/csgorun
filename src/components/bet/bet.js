@@ -1,8 +1,8 @@
 import styled from "styled-components"
 import BetCard from "./betCard"
-import gold from '../img/double-icon-gold.png'
-import blue from '../img/double-icon-blue.png'
-import green from '../img/double-icon-green.png'
+import gold from '../../img/double-icon-gold.png'
+import blue from '../../img/double-icon-blue.png'
+import green from '../../img/double-icon-green.png'
 
 function Bet() {
     return (

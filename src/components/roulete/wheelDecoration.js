@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import arrow from "../img/arrow.svg";
-import dots from "../img/dots-mask.webp";
-import arc from "../img/circle.svg";
+import arrow from "../../img/arrow.svg";
+import dots from "../../img/dots-mask.webp";
+import arc from "../../img/circle.svg";
 
-function WheelDecoration({ activeRoulette, illuminationInnerRef, illuminationOuterRef }) {
+function WheelDecoration({ activeRoulette, illuminationInnerRef, illuminationOuterRef, dotsIlluminationRef}) {
     return (
       <StyledWheelDecoration>
         <div
@@ -16,7 +16,7 @@ function WheelDecoration({ activeRoulette, illuminationInnerRef, illuminationOut
               className="double-wheel-decor__circle-light"
               ref={illuminationInnerRef}
             ></div>
-            <div className="double-wheel-decor__circle-dots-wrapper"></div>
+            <div className="double-wheel-decor__circle-dots-wrapper" ref={dotsIlluminationRef}></div>
           </div>
           <div
             className={`double-wheel-decor__arc ${activeRoulette ? "opacity" : ""}`}
@@ -53,10 +53,6 @@ function WheelDecoration({ activeRoulette, illuminationInnerRef, illuminationOut
         transform: translateX(-50%);
     }
 
-    .opacity {
-        opacity: 1;
-    }
-
     .double-wheel-decor__bg {
         position: absolute;
         top: 0;
@@ -74,7 +70,7 @@ function WheelDecoration({ activeRoulette, illuminationInnerRef, illuminationOut
         bottom: -3.5rem;
         left: 50%;
         aspect-ratio: 1 / 1;
-        width: 33.333333%;
+        width: 41.333333%;
         transform: translate3d(-50%, 0, 0);
         border-radius: 9999px;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -118,7 +114,7 @@ function WheelDecoration({ activeRoulette, illuminationInnerRef, illuminationOut
         overflow: hidden;
         border-radius: 9999px;
         bottom: -3.75rem;
-        width: 22.5rem;
+        width: 17.5rem;
         background: #6b8cc1;
         left: 50%;
         transform: translate(-50%);
@@ -136,6 +132,11 @@ function WheelDecoration({ activeRoulette, illuminationInnerRef, illuminationOut
         height: 100%;
         transform: rotate(84.1deg);
         background: #f4c4b2;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .opacity {
+        opacity: 1;
     }
 
   `

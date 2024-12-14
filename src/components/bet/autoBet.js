@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import play from '../img/play.svg'
-import setting from '../img/settings.svg'
+import play from '../../img/play.svg'
+import setting from '../../img/settings.svg'
 
 function AutoBet() {
     return (

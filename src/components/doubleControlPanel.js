@@ -1,8 +1,8 @@
 import styled from "styled-components"
 import NavigationControlPanel from "./navigationControlPanel"
-import BetAmount from "./betAmount"
-import Bet from "./bet"
-import AutoBet from "./autoBet"
+import BetAmount from "./bet/betAmount"
+import Bet from "./bet/bet"
+import AutoBet from "./bet/autoBet"
 
 
 function DoubleControlPanel() {

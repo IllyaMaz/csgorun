@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import minus from '../img/minus.svg'
-import plus from '../img/plus.svg'
+import minus from '../../img/minus.svg'
+import plus from '../../img/plus.svg'
 import { useState } from "react"
 
 function BetAmount() {

@@ -1,34 +1,40 @@
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import RouletteCell from "./rouletteCell";
 
-function Roulette({ cells, setActiveRoulette }) {
+function Roulette({ cells, active, setActiveRoulette }) {
     const rouletteRef = useRef(null);
     const [isSpinning, setIsSpinning] = useState(false);
 
     const handleStartRoulette = () => {
         setActiveRoulette(true)
 
-        setTimeout(() => setActiveRoulette(false),3000)
+        setTimeout(() => setActiveRoulette(false),8000)
     }
 
-    const spinRoulette = () => {
-        if (isSpinning) return;
+    const spinRoulette = useCallback(() => {
+        if (isSpinning) return; // Если уже вращается, не запускаем повторно
         setIsSpinning(true);
 
         const roulette = rouletteRef.current;
         const totalRotation = 1440 + Math.random() * 360; // 4 оборота + случайный угол
-        roulette.style.transition = "transform 3s cubic-bezier(0.25, 1, 0.5, 1)";
-        roulette.style.transform = `rotate(${totalRotation}deg)`;
+        roulette.style.transition = "transform 8s cubic-bezier(0.25, 1, 0.5, 1)";
+        roulette.style.transform = `rotate(${totalRotation}deg)`; // Начало вращения
 
         setTimeout(() => {
-            roulette.style.transition = "";
-            roulette.style.transform = `rotate(${totalRotation % 360}deg)`;
-            setIsSpinning(false);
-        }, 3000);
+            roulette.style.transition = ""; // Убираем transition после завершения
+            roulette.style.transform = `rotate(${totalRotation % 360}deg)`; // Финальный угол
+            setIsSpinning(false); // Завершаем вращение
+        }, 8000); // Завершаем через 8 секунд
 
-        handleStartRoulette()
-    };
+        handleStartRoulette(); // Уведомление о начале вращения
+    }, [isSpinning, handleStartRoulette]);
+
+    useEffect(() => {
+        if (active) {
+            spinRoulette(); 
+        }
+    }, [active, spinRoulette])
 
     return (
         <>

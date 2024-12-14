@@ -38,11 +38,16 @@ const Cell = styled.div`
     scale: -1;
     left: calc(50% - var(--w) / 2);
     top: calc(50% - (var(--w) * var(--aspect-h) / var(--aspect-w)) / 2);
+    transition: .2s ease-in-out;
     pointer-events: auto;
 
     img {
         width: 100%;
         height: 100%;
+    }
+
+    &:hover{
+        --roulette-radius: 42.5;
     }
 `;
 
