@@ -13,7 +13,7 @@ function HeaderCard() {
 
     const navigation = useNavigate()
 
-    const navigate = (path) => {
+    const navigate = (path: string) => {
         navigation(path)
     }
 

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import history from '../../spinHistory.js'
+import history from '../../spinHistory'
 
 function SpinHistory() {
     return (

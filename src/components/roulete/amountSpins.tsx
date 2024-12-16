@@ -1,7 +1,11 @@
 import styled from "styled-components"
 
+type AmountSpinsProps = {
+    color: string;
+    amount: number;
+}
 
-function AmountSpins({color, amount}) {
+function AmountSpins({color, amount}: AmountSpinsProps) {
     return (
         <StyledAmountSpins data-double-type={color} className="bg-gradient-var">
             {amount}

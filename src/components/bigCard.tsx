@@ -1,17 +1,35 @@
 import { useRef } from "react"
 import styled from "styled-components"
 
-function BigCard({picture, name, online}) {
-    const opacityRef = useRef(null)
-    const borderRef = useRef(null)
+interface BigCardProps {
+    picture: string; // или другой тип, в зависимости от того, что представляет 'picture'
+    name: string;
+    online: number;
+}
+
+function BigCard({picture, name, online}: BigCardProps) {
+    const opacityRef = useRef<HTMLDivElement>(null)
+    const borderRef = useRef<HTMLDivElement>(null)
 
     const activeHover = () => {
-        opacityRef.current.style.opacity = '1'
-        borderRef.current.style.border = '1px solid #5d7ec1'
+        if (opacityRef.current) {
+            opacityRef.current.style.opacity = '1'
+        }
+        
+        if (borderRef.current) {
+            borderRef.current.style.border = '1px solid #5d7ec1'
+        }
+        
     }
     const disactiveHover = () => {
-        opacityRef.current.style.opacity = '0'
-        borderRef.current.style.border = '1px solid #2d3a5a'
+        if (opacityRef.current) {
+            opacityRef.current.style.opacity = '0'
+        }
+        
+        if (borderRef.current) {
+            borderRef.current.style.border = '1px solid #2d3a5a'
+        }
+       
     }
 
     return (
@@ -31,7 +49,7 @@ function BigCard({picture, name, online}) {
     )
 }
 
-const StyledBigCard = styled.div`
+const StyledBigCard = styled.div<{picture: string}>`
 
     width: 100%;
     aspect-ratio: 390 / 240;

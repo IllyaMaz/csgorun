@@ -1,7 +1,12 @@
 import styled from "styled-components"
 
+type RouletteCounterProps = {
+    picture: string;
+    name: string;
+    value: number;
+}
 
-function RouletteCounter({picture, name, value}) {
+function RouletteCounter({picture, name, value}: RouletteCounterProps) {
     return (
         <StyledRouletteCounter picture={picture}>
             <div className=" icon picture"></div>
@@ -11,7 +16,7 @@ function RouletteCounter({picture, name, value}) {
     )
 }
 
-const StyledRouletteCounter = styled.div`
+const StyledRouletteCounter = styled.div<{picture: string}>`
 
     display: flex;
     align-items: center;

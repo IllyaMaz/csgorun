@@ -3,31 +3,38 @@ import weapon from '../img/weapon.svg'
 import wallet from '../img/wallet.svg'
 import { useEffect, useRef, useState } from "react"
 
+type TabData = {
+    from: string;
+    to: string;
+    left: string;
+};
+
 function NavigationControlPanel() {
     const [activeTab, setActiveTab] = useState("balance");
-    const markerRef = useRef(null)
+    const markerRef = useRef<HTMLDivElement>(null)
     const balanceRef = useRef(null)
 
-    const handleTabClick = (tabName, event) => {
+    const handleTabClick = (tabName: string) => {
         
         setActiveTab(tabName)
-        const colors = {
+        const colors: {[key: string]: TabData} = {
             balance: { from: "#674D54", to: "#32344F", left: '0%'},
             inventory: { from: "#27516C", to: "#2B3A57", left: '50%'},
         };
 
-        const marker = markerRef.current
-        marker.style.left = `${colors[tabName].left}`
-        marker.style.width = '50%'
+        if (markerRef.current) {
+            const marker = markerRef.current
+            marker.style.left = `${colors[tabName].left}`
+            marker.style.width = '50%'
 
-        marker.style.setProperty('--from', colors[tabName].from)
-        marker.style.setProperty('--to', colors[tabName].to)
+            marker.style.setProperty('--from', colors[tabName].from)
+            marker.style.setProperty('--to', colors[tabName].to)
+        }
+        
     }
 
     useEffect(() => { 
-        if(balanceRef) {
-            handleTabClick(activeTab, {target: balanceRef.current})
-        }
+        handleTabClick(activeTab)
     }, [])
 
     return ( 
@@ -37,7 +44,7 @@ function NavigationControlPanel() {
                 <li>
                     <button 
                         className={activeTab === 'balance' ? 'balance active' : ''} 
-                        onClick={(e) => {handleTabClick('balance', e)}}
+                        onClick={(e) => {handleTabClick('balance')}}
                         ref={balanceRef}
                     >
                         <div className="icon wallet"></div>
@@ -47,7 +54,7 @@ function NavigationControlPanel() {
                 <li>
                     <button 
                         className={activeTab === 'inventory' ? 'inventory active' : ''} 
-                        onClick={(e) => handleTabClick('inventory', e)}
+                        onClick={(e) => handleTabClick('inventory')}
                     >
                         <div className="icon weapon"></div>
                         <span>INVENTORY</span> 

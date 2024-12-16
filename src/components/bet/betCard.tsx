@@ -1,10 +1,16 @@
 import styled from "styled-components"
 
+type BetCardProps = {
+    icon: string; 
+    double: number; 
+    color: string; 
+};
+
 function BetCard({
     icon, 
     double,
     color
-}) {
+}: BetCardProps) {
     return (
         <StyledBetCard data-double-type={color} icon={icon}>
             <div className={`bg-gradient-var bg`}></div>
@@ -19,7 +25,7 @@ function BetCard({
     )
 }
 
-const StyledBetCard = styled.button`
+const StyledBetCard = styled.button<{ icon: string }>`
 
     background-color: #2a3556;
     border-radius: .875rem;

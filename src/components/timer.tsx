@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import styled from "styled-components"
 
 
-function Timer({active, setActiveRoulette}) {
+function Timer({setActiveRoulette} : {setActiveRoulette: (active: boolean) => void}) {
 
     const [timeLeft, setTimeLeft] = useState(15.0)
 
@@ -13,11 +13,11 @@ function Timer({active, setActiveRoulette}) {
         }
 
         const interval = setInterval(() => {
-            setTimeLeft((prev) => Math.max(0, (prev - 0.01).toFixed(2)))
+            setTimeLeft((prev) => Math.max(0, parseFloat((prev - 0.01).toFixed(2))))
         }, 10)
 
         return () => clearInterval(interval);
-    }, [timeLeft])
+    }, [timeLeft, setActiveRoulette])
 
 
     return (

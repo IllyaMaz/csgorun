@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
-function RouletteCell({ angle, color, image }) {
+type RouletteCellProps = {
+    angle: number;
+    color: string;
+    image: string;
+}
+
+function RouletteCell({ angle, color, image }: RouletteCellProps) {
 
     const angleInRadians = (angle * Math.PI) / 180;
     const angleSin = Math.sin(angleInRadians);
@@ -12,7 +18,7 @@ function RouletteCell({ angle, color, image }) {
                 "--angle": `${angle}deg`,
                 "--angle-sin": angleSin,
                 "--angle-cos": angleCos,
-            }}
+            } as React.CSSProperties}
             data-color={color}
         >
             <img src={image} alt={color} />

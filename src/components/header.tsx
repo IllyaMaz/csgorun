@@ -15,14 +15,14 @@ function Header() {
 
     const navigation = useNavigate()
 
-    const navigate = (path) => {
+    const navigate = (path: string) => {
         navigation(path)
     }
     return (
         <StyledHeader>
             <a onClick={() => navigate('/')}>
                 <div className="w-9 mr-87">
-                    <img src={logo}></img>
+                    <img src={logo} alt=""></img>
                 </div>
             </a>
             <div>

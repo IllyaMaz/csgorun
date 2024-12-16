@@ -31,17 +31,29 @@ function Slider() {
     ];
     const [currentIndex, setCurrentIndex] = useState(1);
     const [isTransitioning, setIsTransitioning] = useState(false);
-    const prevArrowBtn = useRef(null)
-    const nextArrowBtn = useRef(null)
+    const prevArrowBtn = useRef<HTMLDivElement>(null)
+    const nextArrowBtn = useRef<HTMLDivElement>(null)
 
     const mouseEnterBlock = () => {
-        prevArrowBtn.current.style.opacity = '1'
-        nextArrowBtn.current.style.opacity = '1'
+        if (prevArrowBtn.current) {
+            prevArrowBtn.current.style.opacity = '1'
+        }
+        
+        if (nextArrowBtn.current) {
+            nextArrowBtn.current.style.opacity = '1'
+        }
+        
     }
 
     const mouseLeaveBlock = () => {
-        prevArrowBtn.current.style.opacity = '0'
-        nextArrowBtn.current.style.opacity = '0'
+        if (prevArrowBtn.current) {
+            prevArrowBtn.current.style.opacity = '0'
+        }
+        
+        if (nextArrowBtn.current) {
+            nextArrowBtn.current.style.opacity = '0'
+        }
+        
     }
 
     const extendedSlides = [

@@ -14,24 +14,33 @@ import jackrun from '../img/jackrun-preview.avif'
 import rollrun from '../img/rollrun-preview.avif'
 import Footer from "../components/footer"
 
+
 function Home() {
-    const leaguesBg = useRef(null)
-    const bonusBg = useRef(null)
+    const leaguesBg = useRef<HTMLDivElement>(null)
+    const bonusBg = useRef<HTMLDivElement>(null)
 
     const leaguesBgFull = () => {
-        leaguesBg.current.style.setProperty('--to', '#26457d')
+        if (leaguesBg.current) {
+            leaguesBg.current.style.setProperty('--to', '#26457d')
+        }
     }
     
     const leaguesBgHalf = () => {
-        leaguesBg.current.style.setProperty('--to', '#223D6F')
+        if (leaguesBg.current) {
+            leaguesBg.current.style.setProperty('--to', '#223D6F')
+        }
     }
 
     const bonusBgFull = () => {
-        bonusBg.current.style.setProperty('--to', '#1e7485a6')
+        if (bonusBg.current) {
+            bonusBg.current.style.setProperty('--to', '#1e7485a6')
+        }
     }
 
     const bonusBgHalf = () => {
-        bonusBg.current.style.setProperty('--to', '#1e748580')
+        if (bonusBg.current) {
+            bonusBg.current.style.setProperty('--to', '#1e748580')
+        }
     }
 
     return (

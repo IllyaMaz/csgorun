@@ -2,11 +2,15 @@ import styled from "styled-components"
 import Timer from "./timer"
 import Loader from "./loader"
 
+type LoadBlockProps = {
+    active: boolean;
+    setActiveRoulette: (active: boolean) => void;
+}
 
-function LoadBlock({active, setActiveRoulette}) {
+function LoadBlock({active, setActiveRoulette}: LoadBlockProps) {
     return (
         <StuledLoadBlock>
-            {active ? <Loader color='gold'/> : <Timer active={active} setActiveRoulette={setActiveRoulette}/>}
+            {active ? <Loader color='gold'/> : <Timer setActiveRoulette={setActiveRoulette}/>}
         </StuledLoadBlock>
     )
 }

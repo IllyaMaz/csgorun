@@ -1,7 +1,15 @@
 import styled from "styled-components"
 import players from '../img/players.svg'
 
-function DoublePlayersBet({color, picture, coefficient, amountBet, players}) {
+type DoublePlayersBetProps = {
+    color: string;
+    picture: string;
+    coefficient: string;
+    amountBet: number;
+    players: number;
+}
+
+function DoublePlayersBet({color, picture, coefficient, amountBet, players}: DoublePlayersBetProps) {
     return (
         <StyledDoublePlayersBet picture={picture} className="bg-gradient-var" data-double-type={color}>
             <div>
@@ -21,7 +29,7 @@ function DoublePlayersBet({color, picture, coefficient, amountBet, players}) {
     )
 }
 
-const StyledDoublePlayersBet = styled.section`
+const StyledDoublePlayersBet = styled.section<{picture: string}>`
 
     height: 4.5rem;
     padding-left: 4.5rem;

@@ -1,16 +1,26 @@
 import { useRef } from "react"
 import styled from "styled-components"
 
-function SmallCard({name, picture, onClick}) {
+type SmallCardProps = {
+    name: string;
+    picture: string;
+    onClick: () => void;
+}
 
-    const myRef = useRef(null)
+function SmallCard({name, picture, onClick}: SmallCardProps) {
+
+    const myRef = useRef<HTMLImageElement>(null)
 
     const activateFilter = () => {
-        myRef.current.style.filter = 'saturate(1)'
+        if (myRef.current) {
+            myRef.current.style.filter = 'saturate(1)'
+        }
     }
 
     const disableFilter = () => {
-        myRef.current.style.filter = 'saturate(.5)'
+        if (myRef.current) {
+           myRef.current.style.filter = 'saturate(.5)' 
+        }
     }
 
     return (
@@ -19,7 +29,7 @@ function SmallCard({name, picture, onClick}) {
             onMouseLeave={disableFilter}    
             onClick={onClick}
         >
-            <img className="picture" src={picture} ref={myRef}></img>
+            <img className="picture" src={picture} ref={myRef} alt=""></img>
             <div className="text">{name}</div>
         </StyledSmallCard>
     )

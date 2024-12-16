@@ -1,21 +1,21 @@
 import styled from "styled-components";
 import Header from "../components/header";
 import HeaderCard from "../components/headerCards";
-import Roulette from "../components/roulete/roulette.js";
-import cells from "../cells.js";
-import DoubleControlPanel from "../components/doubleControlPanel.js";
-import Footer from "../components/footer.js";
+import Roulette from "../components/roulete/roulette";
+import cells from "../cells";
+import DoubleControlPanel from "../components/doubleControlPanel";
+import Footer from "../components/footer";
 import { useEffect, useRef, useState } from "react";
-import WheelDecoration from "../components/roulete/wheelDecoration.js";
-import RouletteInfo from "../components/roulete/rouletteInfo.js";
-import DoublePlayers from "../components/doublePlayers.js";
-import LoadBlock from "../components/loadBlock.js";
+import WheelDecoration from "../components/roulete/wheelDecoration";
+import RouletteInfo from "../components/roulete/rouletteInfo";
+import DoublePlayers from "../components/doublePlayers";
+import LoadBlock from "../components/loadBlock";
 
 function Double() {
   const [activeRoulette, setActiveRoulette] = useState(false);
-  const illuminationInnerRef = useRef(null);
-  const illuminationOuterRef = useRef(null);
-  const dotsIlluminationRef = useRef(null)
+  const illuminationInnerRef = useRef<HTMLDivElement>(null);
+  const illuminationOuterRef = useRef<HTMLDivElement>(null);
+  const dotsIlluminationRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const innerColor = activeRoulette ? "#ff825699" : "#48629699";

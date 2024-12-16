@@ -1,9 +1,10 @@
 import styled from "styled-components"
-import bgLoader from '../img/bg-big-loader.svg'
-import bigLoader from '../img/big-loader.svg'
-import smallLoader from '../img/small-loader.svg'
 
-function Loader({color}) {
+type LoaderProps = {
+    color: string;
+}
+
+function Loader({color}: LoaderProps) {
     return (
         <StuledLoader data-double-type={color}>
             <div className="loader">

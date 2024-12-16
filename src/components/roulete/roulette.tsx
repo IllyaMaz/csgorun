@@ -2,32 +2,46 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import RouletteCell from "./rouletteCell";
 
-function Roulette({ cells, active, setActiveRoulette }) {
-    const rouletteRef = useRef(null);
+type Cell = {
+    color: string;
+    image: string;
+}
+
+type RouletteProps = {
+    cells: Cell[];
+    active: boolean;
+    setActiveRoulette: (active: boolean) => void ;
+}
+
+function Roulette({ cells, active, setActiveRoulette }: RouletteProps) {
+    const rouletteRef = useRef<HTMLDivElement>(null);
     const [isSpinning, setIsSpinning] = useState(false);
 
-    const handleStartRoulette = () => {
-        setActiveRoulette(true)
+    const handleStartRoulette = useCallback(() => {
+        setActiveRoulette(true);
 
-        setTimeout(() => setActiveRoulette(false),8000)
-    }
+        setTimeout(() => setActiveRoulette(false), 8000);
+    }, [setActiveRoulette]);
 
     const spinRoulette = useCallback(() => {
-        if (isSpinning) return; // Если уже вращается, не запускаем повторно
+        if (isSpinning) return;
         setIsSpinning(true);
 
-        const roulette = rouletteRef.current;
-        const totalRotation = 1440 + Math.random() * 360; // 4 оборота + случайный угол
-        roulette.style.transition = "transform 8s cubic-bezier(0.25, 1, 0.5, 1)";
-        roulette.style.transform = `rotate(${totalRotation}deg)`; // Начало вращения
+        if (rouletteRef.current) {
+            const roulette = rouletteRef.current;
+            const totalRotation = 1440 + Math.random() * 360; // 4 оборота + случайный угол
+            roulette.style.transition = "transform 8s cubic-bezier(0.25, 1, 0.5, 1)";
+            roulette.style.transform = `rotate(${totalRotation}deg)`; 
 
-        setTimeout(() => {
-            roulette.style.transition = ""; // Убираем transition после завершения
-            roulette.style.transform = `rotate(${totalRotation % 360}deg)`; // Финальный угол
-            setIsSpinning(false); // Завершаем вращение
-        }, 8000); // Завершаем через 8 секунд
+            setTimeout(() => {
+                roulette.style.transition = "";
+                roulette.style.transform = `rotate(${totalRotation % 360}deg)`;
+                setIsSpinning(false); 
+            }, 8000); 
+        }
+        
 
-        handleStartRoulette(); // Уведомление о начале вращения
+        handleStartRoulette();
     }, [isSpinning, handleStartRoulette]);
 
     useEffect(() => {

@@ -3,7 +3,14 @@ import arrow from "../../img/arrow.svg";
 import dots from "../../img/dots-mask.webp";
 import arc from "../../img/circle.svg";
 
-function WheelDecoration({ activeRoulette, illuminationInnerRef, illuminationOuterRef, dotsIlluminationRef}) {
+type WheelDecorationProps = {
+  activeRoulette: boolean;
+  illuminationInnerRef: React.RefObject<HTMLDivElement | null>;
+  illuminationOuterRef: React.RefObject<HTMLDivElement | null>;
+  dotsIlluminationRef: React.RefObject<HTMLDivElement | null>;
+}
+
+function WheelDecoration({ activeRoulette, illuminationInnerRef, illuminationOuterRef, dotsIlluminationRef}: WheelDecorationProps) {
     return (
       <StyledWheelDecoration>
         <div
