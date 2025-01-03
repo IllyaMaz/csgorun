@@ -97,7 +97,7 @@ const StyledHome = styled.section`
     &::-webkit-scrollbar {
         display: none; /* Chrome, Safari и другие WebKit-браузеры */
     }
-        box-sizing: border-box;
+    box-sizing: border-box;
 `
 
 const StyledGames = styled.section`
