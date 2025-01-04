@@ -5,14 +5,14 @@ import Oponent from "./bet/oponent";
 import AmountOponent from "./bet/amountOponent";
 import RollRunBtn from "./bet/rollRunBtn";
 
-function RollRunControlPanel() {
+function RollRunControlPanel({ onCreateGame }: { onCreateGame: () => void }) {
     return (
         <StyledRollRunControlPanel>
             <NavigationControlPanel/>
             <BetAmount/>
             <Oponent/>
             <AmountOponent amount={4}/>
-            <RollRunBtn/>
+            <RollRunBtn onCreateGame = {onCreateGame}/>
         </StyledRollRunControlPanel>
     )
 }

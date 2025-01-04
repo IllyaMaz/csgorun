@@ -2,10 +2,24 @@ import styled from "styled-components"
 import arrow from '../../img/mask-arrow-right.svg'
 import dots from '../../img/dots-mask.webp'
 import trophy from '../../img/trophy.svg'
+import { useEffect, useRef } from "react"
 
-function WinLeftBlock() {
+function WinLeftBlock({status}: {status: string}) {
+    const winRef = useRef<HTMLDivElement | null>(null)
+
+    useEffect(() => {
+        if (winRef.current) {
+            if (status === 'winner') {
+                winRef.current.style.left = '-1.25rem'
+            } else {
+                winRef.current.style.left = '-25.25rem'
+            }
+        }
+        
+    }, [status])
+
     return (
-        <StyledWinLeftBlock>
+        <StyledWinLeftBlock ref={winRef}>
             <div className="bg-mask icon"></div>
             <div className="mask icon bg-gradient-var">
                 <div className="content">
@@ -30,7 +44,7 @@ function WinLeftBlock() {
 
 const StyledWinLeftBlock = styled.div`
     position: absolute;
-    left: -1.25rem;
+    left: -22.25rem;
     top: 0;
     bottom: 0;
     width: 17.75rem;
@@ -39,6 +53,7 @@ const StyledWinLeftBlock = styled.div`
     z-index: 10;
     align-items: center;
     justify-content: space-between;
+    transition: left 1s;
 
     .mask{
         mask-image: url(${arrow});

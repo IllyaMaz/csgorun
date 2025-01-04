@@ -1,35 +1,31 @@
 import styled from "styled-components"
 import cursor from '../../img/arrow.svg'
 import sectors from '../../sectors'
-import { useRef, useState } from "react"
+import React, { ForwardedRef, useEffect, useRef, useState } from "react"
 import WinLeftBlock from "./winLeftBlock"
 import WinRightBlock from "./winRightBlock"
 
-function RollRunRoulette() {
-
-    const [result, setResult] = useState<{avatar: string} | null>(null)
+const RollRunRoulette = React.forwardRef(({stage}: {stage: string}, ref: ForwardedRef<HTMLDivElement>) => {
+    const [status, setStatus] = useState<'game' | 'winner'>('game')
+    const rouletteRef = useRef<HTMLDivElement | null>(null)
     const trackRef = useRef<HTMLDivElement | null>(null);
-
     const sectorRefs = useRef<(HTMLDivElement | null)[]>([]);
-
     let sector = new Array(80).fill(sectors).flat()
+    let centerSectorRef = useRef<HTMLDivElement | null>(null);
 
     const getMiddlesector = (index:number) => {
         if (trackRef.current){
             const trackWidth = trackRef.current.getBoundingClientRect().width;
-            
             const sectorWidth = sectorRefs.current[0]?.getBoundingClientRect().width;
 
             if (sectorWidth !== undefined) {
                 const centerIndex = Math.ceil(trackWidth / sectorWidth / 2) + index;
-                console.log(sectorRefs.current[centerIndex]);
-                
                 
                 setTimeout(() => {
-                    const centerSector = sectorRefs.current[centerIndex];
-                    if (centerSector) {
-                        centerSector.style.opacity = '1'; // Меняем стиль прямо через реф
-                    } 
+                    centerSectorRef.current = sectorRefs.current[centerIndex];
+                    if (centerSectorRef.current) {
+                        centerSectorRef.current.style.opacity = '1';
+                    }
                 },5000)
             } 
         }
@@ -37,7 +33,6 @@ function RollRunRoulette() {
 
     const startSpin = () => {
         const randomIndex = Math.floor(66)
-        setResult(sectors[randomIndex])
         console.log(sectors.length);
         const sectorWidth = sectorRefs.current[0]?.getBoundingClientRect().width
 
@@ -47,12 +42,40 @@ function RollRunRoulette() {
             trackRef.current.style.transform = `translateX(${stopPosition}px)`;
             getMiddlesector(randomIndex - 1)
         }
+
+        setTimeout(() => {
+            setStatus('winner')
+        }, 5000)
+
+        setTimeout(() => {
+            setStatus('game')
+            if (trackRef.current) {
+                trackRef.current.style.transform = `translateX(0px)`;
+            }
+            
+            if (centerSectorRef.current) {
+                centerSectorRef.current.style.opacity = '0.1';
+            }
+            
+        }, 7000)
     }
 
+    useEffect(() => {
+        if (rouletteRef.current) {
+            if (stage === 'roulette') {
+                rouletteRef.current.style.opacity = '1'
+                startSpin()
+            } else {
+                rouletteRef.current.style.opacity = '0'
+            }
+        }
+        
+    }, [stage])
+
     return (
-        <StyledRollRunRoulette>
-            <WinLeftBlock/>
-            <WinRightBlock/>
+        <StyledRollRunRoulette ref={rouletteRef}>
+            <WinLeftBlock status={status}/>
+            <WinRightBlock status={status}/>
             <div>
                 <div className="line"></div>
                 <div className="icon cursor"></div>
@@ -76,7 +99,7 @@ function RollRunRoulette() {
             {/* <button onClick={() => startSpin()}>SDSFDDS</button> */}
         </StyledRollRunRoulette>
     )
-}
+})
 
 const StyledRollRunRoulette = styled.div`
 

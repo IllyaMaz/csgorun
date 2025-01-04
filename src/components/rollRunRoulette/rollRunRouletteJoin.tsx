@@ -4,11 +4,47 @@ import arrow from '../../img/mask-arrow-left.svg'
 import JoinBlock from "./joinBlock"
 import green from '../../img/bot-giray.jpg'
 import add from '../../img/add.svg'
+import React, { ForwardedRef, useEffect, useRef } from "react"
 
-function RollRunRouletteJoin() {
+const RollRunRouletteJoin = React.forwardRef(({stage}: {stage: string}, ref: ForwardedRef<HTMLDivElement>) => {
+
+    const betRef = useRef<HTMLDivElement | null>(null)
+    const joinRef = useRef<HTMLDivElement | null>(null)
+    const joinBlockRef = useRef<HTMLDivElement | null>(null)
+
+    const hidenBet = () => {
+        if (betRef.current) {
+            betRef.current.style.animation = 'betSlideIn 1s forwards';
+        }
+    }
+
+    const hideJoin = () => {
+        if (joinRef.current) {
+            joinRef.current.style.animation = 'joinSlideIn 1s forwards';
+        }
+    }
+
+    useEffect(() => {
+        if (joinBlockRef.current) {
+            if (stage === 'join' && betRef.current && joinRef.current) {
+                joinBlockRef.current.style.opacity = '1';
+                betRef.current.style.animation = '';
+                joinRef.current.style.animation = '';
+            } else {
+                hidenBet()
+                hideJoin()
+                // joinBlockRef.current.style.opacity = '0';
+            }
+        }
+        
+        
+    }, [stage])
+
+   
+
     return (
-        <StyledRollRunRouletteJoin>
-            <div className="bet">
+        <StyledRollRunRouletteJoin ref={joinBlockRef}>
+            <div className="bet" ref={betRef}>
                 <div className="bg-gradient-var avatar">
                     <img src={avatar} className="picture" alt="Avatar"/>
                 </div>
@@ -18,7 +54,7 @@ function RollRunRouletteJoin() {
                     <div className="footer">Bet in the game</div>
                 </div>
             </div>
-            <div className="join">
+            <div className="join" ref={joinRef}>
                 <div className="arrow-block">
                     <div className="icon back-arrow"></div>
                     <div className="bg-gradient-var front-arrow"></div>
@@ -35,7 +71,7 @@ function RollRunRouletteJoin() {
             </div>
         </StyledRollRunRouletteJoin>
     )
-}
+})
 
 const StyledRollRunRouletteJoin = styled.div`
 
@@ -167,6 +203,42 @@ const StyledRollRunRouletteJoin = styled.div`
     .add{
         mask-image: url(${add});
         width: 1.125rem;
+    }
+
+    @keyframes betSlideIn {
+        0% {
+            left: 0;
+        }
+        100% {
+            left: -25rem;
+        }
+    }
+
+    @keyframes joinSlideIn {
+        0% {
+            right: 0;
+        }
+        100% {
+            right: -25rem;
+        }
+    }
+
+    @keyframes betSlideOut {
+        0% {
+            left: -25rem;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    @keyframes joinSlideOut {
+        0% {
+            right: -25rem;
+        }
+        100% {
+            opacity: 0;
+        }
     }
 `
 export default RollRunRouletteJoin

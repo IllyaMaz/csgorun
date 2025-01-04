@@ -1,13 +1,27 @@
+import React, { ForwardedRef, useEffect, useRef } from "react"
 import styled from "styled-components"
 
-function RollRunRouletteWait({number}: {number: number}) {
+const RollRunRouletteWait = React.forwardRef(({ number, stage }: { number: number, stage: string }, ref: ForwardedRef<HTMLDivElement>) => {
+    const waitRef = useRef<HTMLDivElement | null>(null)
+
+    useEffect(() => {
+        if (waitRef.current) {
+            if (stage === 'wait') {
+                waitRef.current.style.opacity = '1'
+            } else {
+                waitRef.current.style.opacity = '0'
+            }
+        }
+        
+    }, [stage])
+
     return (
-        <StyledRollRunRouletteWaite>
+        <StyledRollRunRouletteWaite ref={waitRef}>
             <div className="header">{number}</div>
             <div className="footer">Place available</div>
         </StyledRollRunRouletteWaite>
     )
-}
+})
 
 const StyledRollRunRouletteWaite = styled.div`
 

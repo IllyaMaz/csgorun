@@ -4,10 +4,22 @@ import HeaderCard from "../components/headerCards"
 import RollRunControlPanel from "../components/rollRunControlPanel"
 import RollRunRouletteLeftSection from "../components/RollRunRouletteLeftSection"
 import { useState } from "react"
+import Footer from "../components/footer"
 
 function RollRun() {
 
-    const [game, setGame] = useState()
+    const [games, setGames] = useState<(number | null)[]>(Array(30).fill(null));
+
+    const createGame = () => {
+        const emptyIndex = games.findIndex((game) => game === null);
+        if (emptyIndex !== -1) {
+            const newGames = [...games];
+            newGames[emptyIndex] = Math.random(); // Уникальный идентификатор игры
+            setGames(newGames);
+        } else {
+            console.warn("Нет свободных слотов для новой игры.");
+        }
+    };
 
     return (
         <StyledRollRun>
@@ -15,9 +27,10 @@ function RollRun() {
             <StyledContent>
                 <HeaderCard/>
                 <StyledPlaySection>
-                    <RollRunRouletteLeftSection/>
-                    <RollRunControlPanel/>
+                    <RollRunRouletteLeftSection games={games} setGame={setGames}/>
+                    <RollRunControlPanel onCreateGame={createGame}/>
                 </StyledPlaySection>
+                <Footer/>
             </StyledContent>
         </StyledRollRun>
     )

@@ -1,9 +1,9 @@
 import styled from "styled-components"
 import weapon from '../../img/weapon.svg'
 
-function RollRunBtn() {
+function RollRunBtn({ onCreateGame }: { onCreateGame: () => void }) {
     return (
-        <StyledRollRunBtn className="bg-gradient-var">
+        <StyledRollRunBtn className="bg-gradient-var" onClick={() => onCreateGame()}>
             <div className="icon weapon"></div>
             Create a game
             <span>0.10$</span>
