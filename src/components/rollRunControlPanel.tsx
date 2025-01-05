@@ -4,6 +4,7 @@ import BetAmount from "./bet/betAmount";
 import Oponent from "./bet/oponent";
 import AmountOponent from "./bet/amountOponent";
 import RollRunBtn from "./bet/rollRunBtn";
+import weapon from '../img/weapon.svg'
 
 function RollRunControlPanel({ onCreateGame }: { onCreateGame: () => void }) {
     return (
@@ -12,7 +13,7 @@ function RollRunControlPanel({ onCreateGame }: { onCreateGame: () => void }) {
             <BetAmount/>
             <Oponent/>
             <AmountOponent amount={4}/>
-            <RollRunBtn onCreateGame = {onCreateGame}/>
+            <RollRunBtn onCreateGame = {onCreateGame} picture={weapon} name="Create Game" bet="0.10$"/>
         </StyledRollRunControlPanel>
     )
 }

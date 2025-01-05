@@ -1,17 +1,28 @@
 import styled from "styled-components"
 import weapon from '../../img/weapon.svg'
 
-function RollRunBtn({ onCreateGame }: { onCreateGame: () => void }) {
+function RollRunBtn(
+    { 
+        onCreateGame,
+        picture,
+        name,
+        bet 
+    }: { 
+        onCreateGame: () => void ,
+        picture: string,
+        name: string,
+        bet: string
+    }) {
     return (
-        <StyledRollRunBtn className="bg-gradient-var" onClick={() => onCreateGame()}>
+        <StyledRollRunBtn picture={picture} className="bg-gradient-var" onClick={() => onCreateGame()}>
             <div className="icon weapon"></div>
-            Create a game
-            <span>0.10$</span>
+            {name}
+            <span>{bet}</span>
         </StyledRollRunBtn>
     )
 }
 
-const StyledRollRunBtn = styled.button`
+const StyledRollRunBtn = styled.button<{picture: string}>`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,7 +47,7 @@ const StyledRollRunBtn = styled.button`
     }
 
     .weapon{
-        mask-image: url(${weapon});
+        mask-image: url(${(props) => props.picture});
         width: 1.5rem;
     }
 
