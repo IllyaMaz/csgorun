@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import weapon from '../../img/weapon.svg'
 
 function RollRunBtn(
     { 

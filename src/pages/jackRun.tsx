@@ -4,18 +4,31 @@ import HeaderCard from "../components/headerCards"
 import Footer from "../components/footer"
 import JackRunControlPanel from "../components/jackRunControlPanel"
 import JackRunContent from "../components/jackRunContent"
+import { useState } from "react"
 
 function JackRun() {
+
+    const [game, setGame] = useState<number>(0)
+
+    const createGame = () => {
+        setGame(1)
+    }
+
+    const stopGame = () => {
+        setGame(0)
+        
+    }
+
     return (
         <StyledJackRun>
             <Header/>
             <StyledContent>
                 <HeaderCard/>
                 <StyledPlaySection>
-                    <JackRunContent/>
-                    <JackRunControlPanel/>
+                    <JackRunContent game={game} stopGame={stopGame}/>
+                    <JackRunControlPanel setGame={createGame} />
                 </StyledPlaySection>
-                {/* <Footer/> */}
+                <Footer/>
             </StyledContent>
         </StyledJackRun>
     )
@@ -48,6 +61,7 @@ const StyledPlaySection = styled.section`
     display: flex;
     gap: 1rem;
     flex-direction: row;
+    margin-bottom: 3rem;
 
 `
 

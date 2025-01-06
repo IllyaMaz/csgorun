@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import trophy from '../../img/trophy.svg'
+import Cursor from "./cursor"
 
 function Winner() {
     return (
@@ -7,6 +8,7 @@ function Winner() {
             <div className="icon trophy"></div>
             <div className="winner bg-gradient-var">Winner</div>
             <div className="footer">IT | RoOoMur</div>
+            <Cursor/>
         </StyledWinner>
     )
 }

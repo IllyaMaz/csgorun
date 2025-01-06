@@ -1,7 +1,7 @@
-import React, { ForwardedRef, useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 import styled from "styled-components"
 
-const RollRunRouletteWait = React.forwardRef(({ number, stage }: { number: number, stage: string }, ref: ForwardedRef<HTMLDivElement>) => {
+function RollRunRouletteWait({ number, stage }: { number: number, stage: string }) {
     const waitRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
@@ -21,7 +21,9 @@ const RollRunRouletteWait = React.forwardRef(({ number, stage }: { number: numbe
             <div className="footer">Place available</div>
         </StyledRollRunRouletteWaite>
     )
-})
+}
+
+    
 
 const StyledRollRunRouletteWaite = styled.div`
 

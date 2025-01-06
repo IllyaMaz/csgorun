@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import styled from "styled-components"
+import Cursor from "./cursor"
 
 function StartGame() {
 
@@ -21,6 +22,7 @@ function StartGame() {
         <StyledStartGame>
             <div className="counter bg-gradient-var">{counter.toFixed(2)}s</div>
             <div className="footer">Before the start of the round</div>
+            <Cursor/>
         </StyledStartGame>
     )
 }

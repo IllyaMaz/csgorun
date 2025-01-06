@@ -4,10 +4,9 @@ import arrow from '../../img/mask-arrow-left.svg'
 import JoinBlock from "./joinBlock"
 import green from '../../img/bot-giray.jpg'
 import add from '../../img/add.svg'
-import React, { ForwardedRef, useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 
-const RollRunRouletteJoin = React.forwardRef(({stage}: {stage: string}, ref: ForwardedRef<HTMLDivElement>) => {
-
+function RollRunRouletteJoin({stage}: {stage: string}) {
     const betRef = useRef<HTMLDivElement | null>(null)
     const joinRef = useRef<HTMLDivElement | null>(null)
     const joinBlockRef = useRef<HTMLDivElement | null>(null)
@@ -71,7 +70,7 @@ const RollRunRouletteJoin = React.forwardRef(({stage}: {stage: string}, ref: For
             </div>
         </StyledRollRunRouletteJoin>
     )
-})
+}
 
 const StyledRollRunRouletteJoin = styled.div`
 

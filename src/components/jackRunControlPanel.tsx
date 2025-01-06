@@ -5,13 +5,13 @@ import JackRunBet from "./bet/jackRunBet"
 import RollRunBtn from "./bet/rollRunBtn"
 import game from '../img/games.svg'
 
-function JackRunControlPanel() {
+function JackRunControlPanel({setGame}: {setGame: () => void}) {
     return (
         <StyledJackRunControlPanel>
             <NavigationControlPanel/>
             <BetAmount/>
             <JackRunBet/>
-            <RollRunBtn onCreateGame={() => {}} picture={game} name="Bet" bet="0.10$"/>
+            <RollRunBtn onCreateGame={setGame} picture={game} name="Bet" bet="0.10$"/>
         </StyledJackRunControlPanel>
     )
 }

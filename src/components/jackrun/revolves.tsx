@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import ticket from '../../img/ticket.svg'
+import Cursor from "./cursor"
 
 function Revolves() {
     return (
@@ -7,6 +8,7 @@ function Revolves() {
             <div className="icon ticket"></div>
             <div className="revolves bg-gradient-var">Revolves</div>
             <div className="footer">Choosing the winner</div>
+            <Cursor/>
         </StyledRevolves>
     )
 }

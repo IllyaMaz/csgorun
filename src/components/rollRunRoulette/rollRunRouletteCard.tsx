@@ -2,7 +2,7 @@ import styled from "styled-components"
 import RollRunRouletteWait from "./rolllRunRouletteWait"
 import RollRunRouletteJoin from "./rollRunRouletteJoin"
 import RollRunRoulette from "./rollRunRoulette"
-import { Dispatch, RefObject, SetStateAction, useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 
 function RollRunRouletteCard({ 
@@ -17,9 +17,6 @@ function RollRunRouletteCard({
     }) {
 
     const [stage, setStage] = useState<"wait" | "join" | "roulette">("wait")
-    const waitRef = useRef<HTMLDivElement | null>(null)
-    const joinRef = useRef<HTMLDivElement | null>(null)
-    const rouletteRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
         if (game) {
@@ -53,9 +50,9 @@ function RollRunRouletteCard({
 
     return (
         <StyledRollRunRouletteCard className="bg-gradient-var">
-            <RollRunRouletteWait stage={stage} ref={waitRef} number={order}/>
-            <RollRunRouletteJoin stage={stage} ref={joinRef}/>
-            <RollRunRoulette stage={stage} ref={rouletteRef}/>
+            <RollRunRouletteWait stage={stage} number={order}/>
+            <RollRunRouletteJoin stage={stage}/>
+            <RollRunRoulette stage={stage} timeSpin={7000} timeReset={3000} winBlock={true} sectorWidth='4rem'/>
         </StyledRollRunRouletteCard>
     )
 }
